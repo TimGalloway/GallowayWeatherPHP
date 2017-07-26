@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+<script src="{{ asset('js/modernizr-2.8.3.js') }}"></script>
+<script src="{{ asset('js/jquery-3.1.1.js') }}" ></script>
+<script src="{{ asset('js/GallowayWeather.js') }}" ></script>
+{% endblock %}
+
+{% block body %}
+<div>
+    <h1>GallowayWeather</h1>
+    {{ form_start(form, {'attr': {'class': 'my-form-class'} }) }}
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <ul>
+            {% for item in WeatherHistories %}
+                <li>
+                {{item.LocalObservationDateTime}}<br />
+                {{item.LocationText}}<br />
+                <img src={{item.Icon}} /><br />
+                {{item.Text}}<br />
+                {{item.Temp}}<br />
+                {{item.created|date("d/m/Y")}}<br />
+                </li>
+            {% endfor %}
+    </ul>
+        </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    ul li {
+        display: inline-block;
+        border: 1px solid black;
+    }
+</style>
+{% endblock %}
