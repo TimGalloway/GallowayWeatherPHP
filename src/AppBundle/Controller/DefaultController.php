@@ -37,13 +37,16 @@ class DefaultController extends Controller
     public function autoCompleteAction(Request $request)
     {
         $headers = array('Accept' => 'application/json');
-        $query = array('q' => 'Frank sinatra', 'type' => 'track');
-        
-        $response = Unirest\Request::get('https://api.spotify.com/v1/search',$headers,$query);
 
-        return $this->json(array(array('key' => '123',
-                                'LocalizedName' => 'Test',
-                                'CountryLocalizedName' => 'WA',
-                                )));
+        $page = $request->query->get('page', 1);
+        $query = array('q' => $request->query->get('q', 1), 'apikey' => 'iawaHWRLky4JEW7jom6xHKuIEQFrL5Ah');
+
+        $response = Unirest\Request::get('http://dataservice.accuweather.com/locations/v1/cities/autocomplete',$headers,$query);
+
+        return $this->json($response);
+        //return $this->json(array(array('key' => '123',
+        //                        'LocalizedName' => 'Test',
+        //                        'CountryLocalizedName' => 'WA',
+        //                        )));
     }
 }

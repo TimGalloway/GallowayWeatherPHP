@@ -40,8 +40,8 @@ function getAutoCompleteValues(val, weatherType) {
         cache: false,
         success: function (data) {
             $(".lstResults").html('');
-            $.each(data, function (i, item) {
-                $(".lstResults").append('<option value="' + item.Key + '">' + item.LocalizedName + ', ' + item.CountryLocalizedName + '</option>');
+            $.each(data.body, function (i, item) {
+                $(".lstResults").append('<option value="' + item.Key + '">' + item.AdministrativeArea.LocalizedName + ', ' + item.Country.LocalizedName + '</option>');
             });
             $(".searchtext").removeClass("loading");
         },
