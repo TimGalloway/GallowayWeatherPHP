@@ -22,33 +22,33 @@
     
 
 
-    $("#searchtext").keyup(function () {
-        if ($("#lstWeatherType:checked").val() == "AccuWeather") {
-            getAutoCompleteValues($("#searchtext").val(), "AccuWeather");
+    $(".searchtext").keyup(function () {
+        if ($(".lstWeatherType:checked").val() == "AccuWeather") {
+            getAutoCompleteValues($(".searchtext").val(), "AccuWeather");
         }
     });
 });
 
 function getAutoCompleteValues(val, weatherType) {
     if (val.length < 3) return false;
-    $("#searchtext").addClass("loading");
+    $(".searchtext").addClass("loading");
     $.ajax({
         type: "GET",
         dataType: "json",
         jsonpCallback: "callback",
-        url: "/home/AutoCompleteAsync?weatherType=" + weatherType + "&searchText=" + val,
+        url: "/autoComplete?weatherType=" + weatherType + "&searchText=" + val,
         cache: false,
         success: function (data) {
-            $("#lstResults").html('');
+            $(".lstResults").html('');
             $.each(data, function (i, item) {
-                $("#lstResults").append('<option value="' + item.Key + '">' + item.LocalizedName + ', ' + item.Country.LocalizedName + '</option>');
+                $(".lstResults").append('<option value="' + item.Key + '">' + item.LocalizedName + ', ' + item.CountryLocalizedName + '</option>');
             });
-            $("#searchtext").removeClass("loading");
+            $(".searchtext").removeClass("loading");
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);
             alert(thrownError);
-            $("#searchtext").removeClass("loading");
+            $(".searchtext").removeClass("loading");
         }
     });
 }

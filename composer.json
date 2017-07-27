@@ -29,7 +29,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "mashape/unirest-php": "3.*"
     },
     "scripts": {
         "symfony-scripts": [

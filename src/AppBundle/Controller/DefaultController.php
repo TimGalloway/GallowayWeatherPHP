@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Form;
+use Unirest;
 
 class DefaultController extends Controller
 {
@@ -28,5 +29,21 @@ class DefaultController extends Controller
             'WeatherHistories'=> $WeatherHistories,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+    * @Route("/autoComplete", name="autocomplete")
+    */
+    public function autoCompleteAction(Request $request)
+    {
+        $headers = array('Accept' => 'application/json');
+        $query = array('q' => 'Frank sinatra', 'type' => 'track');
+        
+        $response = Unirest\Request::get('https://api.spotify.com/v1/search',$headers,$query);
+
+        return $this->json(array(array('key' => '123',
+                                'LocalizedName' => 'Test',
+                                'CountryLocalizedName' => 'WA',
+                                )));
     }
 }

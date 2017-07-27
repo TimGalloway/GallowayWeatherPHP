@@ -19,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class DefaultForm extends AbstractType
 {
@@ -38,11 +39,19 @@ class DefaultForm extends AbstractType
             	 'choice_attr' => function($val, $key, $index) { return ['class' => 'lstWeatherType'];},
             	 'data' => 'AccuWeather',
             ))
-            ->add('criteria')
+            ->add('criteria', TextType::class, array(
+            	'attr' => array(
+            		'class' => 'searchtext'
+        		)
+        	))
+
             ->add('results', ChoiceType::class, array(
             	'choices' => array(
             		'Perth' => '26797',
-            	)
+            	),
+            	'attr' => array(
+            		'class' => 'lstResults'
+        		)
             ))
             ->add('tempunit', ChoiceType::class, array(
             	'choices' => array(

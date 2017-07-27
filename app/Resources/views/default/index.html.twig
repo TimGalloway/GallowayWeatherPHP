@@ -9,8 +9,14 @@
 {% block body %}
 <div>
     <h1>GallowayWeather</h1>
-    {{ form_start(form, {'attr': {'class': 'my-form-class'} }) }}
-        {{ form_widget(form) }}
+    {{ form_start(form) }}
+        {{ form_row(form.lstWeatherType) }}
+        {{ form_row(form.criteria) }}
+        <div class="form-group" id="divResults">
+        {{ form_row(form.results) }}
+        </div>
+        {{ form_row(form.tempunit) }}
+        {{ form_row(form.save) }}
     {{ form_end(form) }}
     <ul>
             {% for item in WeatherHistories %}
